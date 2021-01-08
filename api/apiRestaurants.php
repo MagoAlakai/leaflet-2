@@ -1,6 +1,6 @@
 <?php
 /*
-Trataremos los datos deacuerdo con la especificación 
+Trataremos los datos de acuerdo con la especificación 
 */
 include("_db.php");
 

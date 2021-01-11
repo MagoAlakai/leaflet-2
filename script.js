@@ -29,7 +29,8 @@ function onMapLoad() {
 let showTiposComidas = (data_markers)=>{
 	let itemsFoods = [];
 	for(let i = 1; i < data_markers.length; i++){
-		let arr = data_markers[i].kind_food.split(',');
+		let arr = data_markers[i].kind_food.split(', ');
+		console.log(arr);
 		arr.forEach((food)=>{
 			if(itemsFoods.indexOf(food) === -1){
 				$('#kind_food_selector').append(`<option>${food}</option>`);

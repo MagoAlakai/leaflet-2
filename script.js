@@ -21,6 +21,7 @@ function onMapLoad() {
 			})
 			showTiposComidas(data_markers);
 			render_to_map(data_markers, 'all');
+			console.log(data_markers);
 		})
 }
 
@@ -28,14 +29,18 @@ function onMapLoad() {
 let showTiposComidas = (data_markers)=>{
 	let itemsFoods = [];
 	for(let i = 1; i < data_markers.length; i++){
-		if(itemsFoods.indexOf(data_markers[i].kind_food) === -1){
-			$('#kind_food_selector').append(`<option>${data_markers[i].kind_food}</option>`);
-			itemsFoods.push(data_markers[i].kind_food);
-		}
+		let arr = data_markers[i].kind_food.split(',');
+		arr.forEach((food)=>{
+			if(itemsFoods.indexOf(food) === -1){
+				$('#kind_food_selector').append(`<option>${food}</option>`);
+				itemsFoods.push(food);
+			}
+		})
 		marker = L.marker([data_markers[i].lat, data_markers[i].lng]);
 		marker.bindPopup(`<b>${data_markers[i].name}</b><br>${data_markers[i].address}`).openPopup();
 		markers_arr.push(marker);
 	}
+	console.log(itemsFoods);
 }
 
 //Filtrar por tipos de comida y mostrar/resetear markers
@@ -57,7 +62,11 @@ let render_to_map = (data_markers,filter)=>{
 		})
 	}else{
 		for(let i = 1; i < data_markers.length; i++){
-			if(data_markers[i].kind_food === filter){
+			let arr = data_markers[i].kind_food.split(',');
+			let index = arr.indexOf(filter);
+			console.log(arr);
+			if(index !== -1 ){
+				console.log()
 				marker = L.marker([data_markers[i].lat, data_markers[i].lng]);
 				marker.bindPopup(`<b>${data_markers[i].name}</b><br>${data_markers[i].address}`).openPopup();
 				markers.addLayer(marker);

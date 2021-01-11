@@ -62,10 +62,8 @@ let render_to_map = (data_markers,filter)=>{
 		})
 	}else{
 		for(let i = 1; i < data_markers.length; i++){
-			let arr = data_markers[i].kind_food.split(',');
-			let index = arr.indexOf(filter);
-			console.log(arr);
-			if(index !== -1 ){
+			let arr = data_markers[i].kind_food.split(', ');
+			if(arr.includes(filter)){
 				console.log()
 				marker = L.marker([data_markers[i].lat, data_markers[i].lng]);
 				marker.bindPopup(`<b>${data_markers[i].name}</b><br>${data_markers[i].address}`).openPopup();
